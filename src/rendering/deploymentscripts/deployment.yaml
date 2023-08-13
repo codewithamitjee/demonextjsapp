@@ -16,8 +16,8 @@ spec:
       nodeSelector:
           kubernetes.io/os: windows
       containers:
-      - name: littelfusejss-renderingjss
-        image: mccc2memsekrdmx8jw9acr.azurecr.io/littelfusejss-renderingjss:1.0.1.1793
+      - name: demonextjsapp-renderingjss
+        image: nextjsdemoacr.azurecr.io/demonextjsapp-renderingjss:BuildId
         resources:
           requests:
             memory: 800Mi
