@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: renderingjss
+  name: web
   namespace: sitecore
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: renderingjss
+      app: web
   template:
     metadata:
       labels:
-        app: renderingjss
+        app: web
     spec:
       nodeSelector:
           kubernetes.io/os: windows
