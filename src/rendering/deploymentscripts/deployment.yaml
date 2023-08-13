@@ -16,7 +16,7 @@ spec:
       nodeSelector:
           kubernetes.io/os: windows
       containers:
-      - name: codewithamitjeedemonextjsapp_web
+      - name: web
         image: nextjsdemoacr.azurecr.io/codewithamitjeedemonextjsapp_web:25
         resources:
           requests:
