@@ -1,0 +1,9 @@
+{
+  "sitecore": {
+    "instancePath": "..\\..\\docker\\deploy\\platform\\",
+    "apiKey": "03C5D444-D9E1-40F7-A454-FA0787081CD7",
+    "deploySecret": "58C63D8DC7D74EC0A243F78E0A7B60A5",
+    "deployUrl": "https://cm.dempnextjsapp.localhost/sitecore/api/jss/import",
+    "layoutServiceHost": "https://cm.dempnextjsapp.localhost"
+  }
+}
