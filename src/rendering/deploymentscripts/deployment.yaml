@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: renderingjss
+  namespace: sitecore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: renderingjss
+  template:
+    metadata:
+      labels:
+        app: renderingjss
+    spec:
+      nodeSelector:
+          kubernetes.io/os: windows
+      containers:
+      - name: littelfusejss-renderingjss
+        image: mccc2memsekrdmx8jw9acr.azurecr.io/littelfusejss-renderingjss:1.0.1.1793
+        resources:
+          requests:
+            memory: 800Mi
+            cpu: 1000m
+          limits:
+            memory: 3Gi
+            cpu: 20000m
+        ports:
+          - containerPort: 3000
+        imagePullPolicy: Always
+        env:
+          - name: "REACT_APP_ENVIRONMENT"
+            value: "Dev"
+          - name: "SITECORE_API_KEY"
+            value: "546FB77C-D7A2-4B5F-B695-B5355150FCA5"
+          - name: "SITECORE_API_HOST"
+            value: "https://mccc2memsekrdmx8jw9-cm.managedcloud.sitecore.com/"
+          - name: "FETCH_WITH"
+            value: "REST"
+          - name: "JSS_EDITING_SECRET"
+            value: "X0v32AxjP9uFpuR2CSX2eruIdnx0kKY32woGFDyKKd6Z643xeJv6uuXdaURUHZz5"
+          - name: "NEXTJS_DIST_DIR"
+            value: ".next"
+      imagePullSecrets:
+        - name: mccc2memsekrdmx8jw9acr
