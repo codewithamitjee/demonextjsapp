@@ -1,55 +1,36 @@
-# escape=`
-
-#
-# Development-only image for running Next.js in a containerized environment.
-# Assumes that the Next.js rendering host source is mounted to c:\app.
-#
-
-ARG PARENT_IMAGE
-FROM ${PARENT_IMAGE} as deps
+FROM node:18-alpine AS deps
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN  npm install --production
+
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-#COPY package.json ./
-#RUN DIR
-#RUN npm install -g npm@9.8.1
-#RUN npm cache clean
-#RUN npm config set update-notifier false
-#RUN npm install --silent
 
-#FROM ${PARENT_IMAGE} as builder
-#WORKDIR /app
-#COPY . .
-RUN DIR
-#COPY --from=deps /app/node_modules ./node_modules
-#ENV NEXT_TELEMETRY_DISABLED 1
-#RUN npm run build --silent
+ENV NEXT_TELEMETRY_DISABLED 1
 
-#FROM ${PARENT_IMAGE} as runner
-#WORKDIR /app
-#ENV NODE_ENV production
-#ENV NEXT_TELEMETRY_DISABLED 1
-#USER ContainerAdministrator
+RUN npm run build
 
-#SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+FROM node:18-alpine AS runner
+WORKDIR /app
 
-#COPY --from=builder /app/next.config.js ./next.config.js
-#COPY --from=builder /app/scjssconfig.json ./scjssconfig.json
-#COPY --from=builder /app/tsconfig.scripts.json ./tsconfig.scripts.json
-##COPY --from=builder /app/tsconfig.json ./tsconfig.json
-#COPY --from=builder /app/public ./public
-#COPY --from=builder /app/.next ./.next
-#COPY --from=builder /app/node_modules ./node_modules
-#COPY --from=builder /app/scripts ./scripts
-#COPY --from=builder /app/src ./src
-#COPY --from=builder /app/package.json ./package.json
-#COPY --from=builder /app/.graphql-let.yml ./.graphql-let.yml
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
 
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-#RUN Remove-Item -Path C:\app\.next\static -Force -Recurse;
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-EXPOSE 80
-EXPOSE 443
-EXPOSE 8089
-EXPOSE 3005
+USER nextjs
+
 EXPOSE 3000
-ENTRYPOINT "npm run start"
+
+ENV PORT 3000
+
+CMD ["npm", "start"]
