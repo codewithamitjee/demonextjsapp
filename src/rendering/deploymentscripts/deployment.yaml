@@ -20,7 +20,7 @@ spec:
           claimName: azurefile
       containers:
       - name: demonextjsapp-renderingjss
-        image: nextjsaks.azurecr.io/demonextjsapp-renderingjss:41
+        image: nextjsaks.azurecr.io/demonextjsapp-renderingjss:BuildId
         volumeMounts:
           - name: azure
             mountPath: c:/app/app-data
