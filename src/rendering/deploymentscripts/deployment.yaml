@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: renderingjss
-  namespace: sitecore
 spec:
   replicas: 1
   selector:
@@ -15,9 +14,16 @@ spec:
     spec:
       nodeSelector:
           kubernetes.io/os: windows
+      volumes:
+      - name: azure
+        persistentVolumeClaim:
+          claimName: azurefile
       containers:
       - name: demonextjsapp-renderingjss
-        image: nextjsaks.azurecr.io/demonextjsapp-renderingjss:BuildId
+        image: nextjsaks.azurecr.io/demonextjsapp-renderingjss:41
+        volumeMounts:
+          - name: azure
+            mountPath: c:/app/app-data
         resources:
           requests:
             memory: 800Mi

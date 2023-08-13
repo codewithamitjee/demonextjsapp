@@ -26,5 +26,11 @@ services:
       context: .
       args:
         PARENT_IMAGE: ${REGISTRY}${COMPOSE_PROJECT_NAME}-nodejs:${VERSION:-latest}
+    volumes:
+      - type: bind
+        source: c:/smartms
+        target: /smartms
+        volume:
+          nocopy: true
     depends_on:
       - nodejs
