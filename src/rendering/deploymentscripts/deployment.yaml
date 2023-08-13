@@ -18,13 +18,6 @@ spec:
       containers:
       - name: web
         image: nextjsdemoacr.azurecr.io/codewithamitjeedemonextjsapp_web:25
-        resources:
-          requests:
-            memory: 800Mi
-            cpu: 1000m
-          limits:
-            memory: 3Gi
-            cpu: 20000m
         ports:
           - containerPort: 3000
         imagePullPolicy: Always
