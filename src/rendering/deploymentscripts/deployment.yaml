@@ -16,8 +16,8 @@ spec:
       nodeSelector:
           kubernetes.io/os: windows
       containers:
-      - name: demonextjsapp-renderingjss
-        image: nextjsdemoacr.azurecr.io/demonextjsapp-renderingjss:BuildId
+      - name: codewithamitjeedemonextjsapp_web
+        image: nextjsdemoacr.azurecr.io/codewithamitjeedemonextjsapp_web:25
         resources:
           requests:
             memory: 800Mi
