@@ -1,0 +1,16 @@
+{
+    "namespace": "dempnextjsapp-Content",
+    "references": [ "dempnextjsapp" ],
+    "items": {
+        "includes": [
+            {
+                "name": "content",
+                "path": "/sitecore/content/dempnextjsapp"
+            },
+            {
+                "name": "media",
+                "path": "/sitecore/media library/dempnextjsapp"
+            }
+        ]
+    }
+}
