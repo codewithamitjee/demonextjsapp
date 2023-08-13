@@ -21,7 +21,6 @@ services:
     scale: 0
 
   renderingjss:
-    isolation: ${ISOLATION}
     image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-renderingjss:${VERSION:-latest}
     build:
       context: .
