@@ -20,7 +20,7 @@ spec:
           claimName: azurefile
       containers:
       - name: demonextjsapp-renderingjss
-        image: nextjsaks.azurecr.io/demonextjsapp-renderingjss:BuildId
+        image: dockeracrr.azurecr.io/demonextjsapp-renderingjss:51
         volumeMounts:
           - name: azure
             mountPath: c:/app/app-data
@@ -47,5 +47,7 @@ spec:
             value: "X0v32AxjP9uFpuR2CSX2eruIdnx0kKY32woGFDyKKd6Z643xeJv6uuXdaURUHZz5"
           - name: "NEXTJS_DIST_DIR"
             value: ".next"
+          - name: "PUBLIC_URL"
+            value: "http://20.241.173.49/"
       imagePullSecrets:
         - name: mccc2memsekrdmx8jw9acr
