@@ -17,6 +17,7 @@ RUN npm install --silent
 COPY . .
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
+RUN npm run build --silent
 USER ContainerAdministrator
 
 #COPY package.json ./
