@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package.json ./
 RUN DIR
 #UN npm install -g npm@9.8.1
-RUN npm cache clean
+#RUN npm cache clean
 RUN npm config set update-notifier false
 RUN npm install --silent
 COPY . .
