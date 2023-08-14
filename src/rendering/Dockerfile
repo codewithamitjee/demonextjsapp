@@ -10,7 +10,7 @@ FROM ${PARENT_IMAGE} as deps
 WORKDIR /app
 RUN DIR
 #RUN npm install -g npm@9.8.1
-RUN npm cache clean
+#ssRUN npm cache clean
 RUN npm config set update-notifier false
 RUN npm install --silent
 COPY . .
